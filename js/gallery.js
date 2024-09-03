@@ -83,9 +83,11 @@ const ulEl = document.querySelector(".gallery");
 ulEl.insertAdjacentHTML('afterbegin', stringForImages);
 
 ulEl.addEventListener('click', event => {
+
   const clickedImage = event.target.closest('.gallery-image');
 
   if (!clickedImage) return;
 
   basicLightbox.create(`<img src="${clickedImage.dataset.source}">`).show();
 });
+
