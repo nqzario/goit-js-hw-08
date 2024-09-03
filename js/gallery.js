@@ -64,17 +64,6 @@ const images = [
   },
 ];
 
-// <li class="gallery-item">
-  // <a class="gallery-link" href="large-image.jpg">
-    // <img
-      // class="gallery-image"
-      // src="small-image.jpg"
-      // data-source="large-image.jpg"
-      // alt="Image description"
-    // />
-  // </a>
-// </li>
-
 const stringForImages = images.reduce((value, image) => { 
   return value += `<li class="gallery-item">
   <a class="gallery-link" href="${image.original}" onclick="return false;">
@@ -90,17 +79,11 @@ const stringForImages = images.reduce((value, image) => {
 }, '')
 
 const ulEl = document.querySelector(".gallery");
-ulEl.insertAdjacentHTML('afterbegin', stringForImages);
-const imgEl = document.querySelectorAll(".gallery-image");
+
 ulEl.addEventListener('click', event => {
-  if (event.currentTarget === event.target) return;
-  for (let i = 0; i < imgEl.length; i++) {
-    if (event.target === imgEl[i]) {
-      basicLightbox.create(`<img src="${imgEl[i].dataset.source}">`).show()
-    }
-  }
-  // 2 способи 
+  const clickedImage = event.target.closest('.gallery-image');
   
-  // const clickedImage = imgEl.find(img => event.target === img);
-  // if(clickedImage) basicLightbox.create(`<img src="${clickedImage.dataset.source}">`).show()
+  if (!clickedImage) return;
+
+  basicLightbox.create(`<img src="${clickedImage.dataset.source}">`).show();
 });
