@@ -80,10 +80,17 @@ const stringForImages = images.reduce((value, image) => {
 
 const ulEl = document.querySelector(".gallery");
 
+// Вставляем HTML-код с изображениями в элемент галереи
+ulEl.insertAdjacentHTML('afterbegin', stringForImages);
+
+// Добавляем обработчик клика на родительский элемент галереи
 ulEl.addEventListener('click', event => {
+  // Проверяем, был ли клик по изображению (элементу с классом "gallery-image")
   const clickedImage = event.target.closest('.gallery-image');
-  
+
+  // Если клик был не по изображению, выходим из функции
   if (!clickedImage) return;
 
+  // Если клик был по изображению, открываем его в модальном окне
   basicLightbox.create(`<img src="${clickedImage.dataset.source}">`).show();
 });
